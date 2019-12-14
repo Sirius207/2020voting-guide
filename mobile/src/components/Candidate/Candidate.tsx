@@ -10,7 +10,31 @@ import NoInfoTab from './NoInfoTab';
 import PassPerformanceTab from './PassPerformanceTab';
 import StrengthTab from './StrengthTab';
 
-const CandidateDefault = {
+export interface CandidateType {
+    name: string;
+    photo: string;
+    county: string;
+    constituency: string;
+    party: string;
+    age: number;
+    lastterm: string;
+    lasttermyear: string;
+    educations: string;
+    experiences: string;
+    politics: string;
+    sittingRate: number;
+    interpellationRate: number;
+    interpellationnum: string;
+    currentLegislator: boolean;
+    maxinterpellationnum: string;
+    interpellationcategory: string;
+    billnum: string;
+    billnumcategory: string;
+    politicalcontribution: string;
+    othercandidate: string;
+}
+
+export const CandidateDefault = {
     name: '',
     photo: '',
     county: '',

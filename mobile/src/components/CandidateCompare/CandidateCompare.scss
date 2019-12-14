@@ -1,0 +1,33 @@
+@import '../../css//variable';
+
+.page-candidate-compare{
+  overflow-x: hidden;
+  .swiper-slide{
+    width: 65vw;
+    @include mediaMedium{
+      width: 55vw;
+    }
+    @include mediaLarge{
+      width: 40vw;
+    }
+  }
+}
+
+.canidate-compare-card{
+  padding: 8px;
+  position: relative;
+  .canidate-compare-card__header{
+    position: relative;
+    &-close-btn{
+      position: absolute;
+      top: -16px;
+      right: -16px;
+    }
+  }
+}
+
+.candidate-compare-fb{
+  iframe{
+    width: 100%;
+  }
+}

@@ -1,0 +1,20 @@
+.btn{
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px 12px;
+  color: $color-primary;
+  &.btn-rounded{
+    border: 1px solid $color-primary;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  &.btn-cancel{
+    color: rgba(0, 0, 0, 0.54);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    border-radius: 4px;
+    svg{
+      padding-top:3px;
+    }
+  }
+}
