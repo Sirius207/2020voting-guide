@@ -18,13 +18,16 @@ export default function CandidateCompareCardFB({ name, constituency }: Props) {
         [name]
     );
 
-    if (isLoading) {
-        return null;
-    }
-    return (
-        <div className="candidate-compare-fb">
-            <Box textAlign="center" maxHeight={130}>
+    let child = null;
+    if (!isLoading) {
+        if (!responseData.fbPage) {
+            child = (
+                <div className="iframe">沒有Facebook粉絲團，這裡要換文字</div>
+            );
+        } else {
+            child = responseData.fbPage && (
                 <iframe
+                    className="iframe"
                     src={
                         'https://www.facebook.com/plugins/page.php?' +
                         `href=${responseData.fbPage}` +
@@ -37,7 +40,12 @@ export default function CandidateCompareCardFB({ name, constituency }: Props) {
                     frameBorder="0"
                     allow="encrypted-media"
                 />
-            </Box>
+            );
+        }
+    }
+    return (
+        <div className="candidate-compare-col candidate-compare-fb">
+            {child}
         </div>
     );
 }

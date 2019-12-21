@@ -3,7 +3,7 @@ import { useEffect, useState, DependencyList } from 'react';
 export default function useFetch<T>(
     apiPath: string,
     initState: any,
-    deps?: DependencyList
+    deps: DependencyList = []
 ) {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [responseData, setResponseData] = useState<T>(initState);

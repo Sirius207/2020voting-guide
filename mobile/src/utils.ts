@@ -27,9 +27,16 @@ export const scrollBody = (dom: string, duration = 0.5, gap = 10) => {
 };
 
 export const billNoToDate = (billNo: string) => {
-    const year = parseInt(billNo.substr(0, 3)) + 1911
-    const month = billNo.substr(3, 2)
-    const day = billNo.substr(5, 2)
-    
-    return `${year}-${month}-${day}`
-}
+    const year = parseInt(billNo.substr(0, 3)) + 1911;
+    const month = billNo.substr(3, 2);
+    const day = billNo.substr(5, 2);
+
+    return `${year}-${month}-${day}`;
+};
+
+export const pipe = function(initialValue: any, ...fns: Function[]) {
+    return fns.reduce(
+        (prev: any, currentFun: Function) => currentFun(prev),
+        initialValue
+    );
+};

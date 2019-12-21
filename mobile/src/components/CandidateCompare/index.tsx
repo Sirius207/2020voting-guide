@@ -3,8 +3,8 @@ import { Link, Box, Card } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import CandidateCompareCardHeader from './CandidateCompareCardHeader';
-import CandidateCompareCardContent from './CandidateCompareCardContent';
 import CandidateCompareCardFB from './CandidateCompareCardFB';
+import CandidateCompareCardIssueBill from './CandidateCompareCardIssueBill';
 
 import './CandidateCompare.scss';
 
@@ -30,22 +30,39 @@ const CandidateCompare = ({ match }: Route) => {
     const swiperContainer = React.useRef<HTMLDivElement>(null);
     const swiperRef = React.useRef<any>(null);
     React.useLayoutEffect(() => {
+        document.body.classList.add('body-page-candidate-compare');
         const swiper = new window.Swiper(swiperContainer.current, {
-            slidesPerView: 'auto'
+            slidesPerView: 'auto',
+            freeMode: true,
+            // autoHeight: true,
+            scrollbar: {
+                el: '.swiper-scrollbar'
+            },
+            mousewheel: true
         });
         swiperRef.current = swiper;
-        return () => swiper.destroy();
+        /* setTimeout(function() {
+            swiper.update();
+        }, 1500); */
+        return () => {
+            document.body.classList.remove('body-page-candidate-compare');
+            swiper.destroy();
+        };
     }, []);
+
+    React.useLayoutEffect(() => {
+        if (swiperRef.current) {
+            swiperRef.current.update();
+        }
+    }, [candidateNames]);
 
     const onDelete = React.useCallback((name: string) => {
         setCandidateNames((prev: string[]) => {
             const indexOf: number = prev.indexOf(name);
             prev.splice(indexOf, 1);
-            swiperRef.current.update();
             return [...prev];
         });
     }, []);
-
     return (
         <div className="page-candidate-compare">
             <Box m={1}>
@@ -71,10 +88,13 @@ const CandidateCompare = ({ match }: Route) => {
             </Box>
             <div className="swiper-container" ref={swiperContainer}>
                 <div className="swiper-wrapper">
-                    {candidateNames.map((name: string) => {
-                        return (
-                            <div className="swiper-slide" key={name}>
-                                <div className="canidate-compare-card">
+                    <div className="swiper-slide candidate-compare-row">
+                        {candidateNames.map((name: string) => {
+                            return (
+                                <div
+                                    className="canidate-compare-card"
+                                    key={name}
+                                >
                                     <Card>
                                         <Box px={2} py={2}>
                                             <CandidateCompareCardHeader
@@ -85,10 +105,12 @@ const CandidateCompare = ({ match }: Route) => {
                                                 }
                                                 onDelete={onDelete}
                                             />
-                                            <CandidateCompareCardContent
+                                            <div className="divider style-gray my-3"></div>
+                                            <CandidateCompareCardIssueBill
                                                 name={name}
                                                 constituency={constituency}
                                             />
+                                            <div className="divider style-gray my-3"></div>
                                             <CandidateCompareCardFB
                                                 name={name}
                                                 constituency={constituency}
@@ -96,14 +118,12 @@ const CandidateCompare = ({ match }: Route) => {
                                         </Box>
                                     </Card>
                                 </div>
-                            </div>
-                            // swiper-slide end
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
+                    <div className="swiper-scrollbar"></div>
                 </div>
-                {/* swiper-wrapper end */}
             </div>
-            {/* swiper-container end */}
         </div>
         // page-candidate-compare end
     );

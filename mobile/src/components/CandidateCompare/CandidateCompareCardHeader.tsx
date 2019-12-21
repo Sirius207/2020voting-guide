@@ -42,12 +42,12 @@ const CandidateCompareCardHeader = ({
     const ageDisplay = age === 0 ? '未知年齡' : `${age} 歲`;
     return (
         <div
-            className={clsx('canidate-compare-card__header loading', {
+            className={clsx('canidate-compare-header loading', {
                 'is-show': isLoading
             })}
         >
             <IconButton
-                className={clsx('canidate-compare-card__header-close-btn', {
+                className={clsx('canidate-compare-header-close-btn', {
                     'd-none': currentCandidateCount <= 2
                 })}
                 onClick={onCloseClick}
